@@ -4,9 +4,41 @@ import pickle
 import numpy as np
 
 
+st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
 
-# Security
-#passlib,hashlib,bcrypt,scrypt
+st.markdown("""
+<style>
+.navbar{
+	background-color:#064663
+}
+.navbar a {
+	color:#fff;
+}
+</style>
+<nav class="navbar fixed-top navbar-expand-lg" >
+  <a  href="#" class="navbar-brand mb-0 h1">Laptop Price Prediction</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="font-size:30px">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link mb-0 h1" href="https://www.flipkart.com/search?q=macbook&sid=6bo%2Cb5g&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_2_3_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_2_3_na_na_ps&as-pos=2&as-type=RECENT&suggestionId=macbook%7CLaptops&requestId=5be9ff4c-b5f9-4b5d-8cf7-2ee60177b883&as-backfill=on" >Ultrabook laptop<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link mb-0 h1" href="https://www.flipkart.com/search?q=gaming+laptop&sid=6bo%2Cb5g&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_2_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_2_na_na_ps&as-pos=1&as-type=RECENT&suggestionId=gaming+laptop%7CLaptops&requestId=aec3757a-574b-4e69-81b9-f08563b12c57&as-searchtext=ga" >Gaming laptop<span class="sr-only">(current)</span></a>
+      </li>
+	   <li class="nav-item active">
+        <a class="nav-link mb-0 h1" href="https://www.flipkart.com/search?q=notebooks+in+laptops&sid=6bo%2Cb5g&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_4_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_4_na_na_ps&as-pos=1&as-type=RECENT&suggestionId=notebooks+in+laptops%7CLaptops&requestId=3872556d-09b0-4bb2-9a99-bce58087d0e6&as-backfill=on" >Notebook laptop <span class="sr-only">(current)</span></a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link mb-0 h1" href="https://www.flipkart.com/search?q=notebooks+in+laptops&sid=6bo%2Cb5g&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_4_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_4_na_na_ps&as-pos=1&as-type=RECENT&suggestionId=notebooks+in+laptops%7CLaptops&requestId=3872556d-09b0-4bb2-9a99-bce58087d0e6&as-backfill=on&p%5B%5D=facets.type%255B%255D%3D2%2Bin%2B1%2BLaptop" >2 in 1 laptop <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+""", unsafe_allow_html=True)
+
 import hashlib
 def make_hashes(password):
 	return hashlib.sha256(str.encode(password)).hexdigest()
@@ -16,13 +48,13 @@ def check_hashes(password,hashed_text):
 		return hashed_text
 	return False
 
-# DB Management
+
 import sqlite3 
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
-# DB  Functions
+
 def create_usertable():
-	c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
+	c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT primary key ,password TEXT)')
 
 
 def add_userdata(username,password):
@@ -77,20 +109,20 @@ def app():
 
 
 def main():
-	"""Simple Login App"""
+	"""Welcome to Laptop Price Prediction App"""
 
 	
 
 	menu = ["Login","Admin","SignUp"]
 	choice = st.sidebar.selectbox("Menu",menu)
-
+	
 	if choice == "Admin":
 		
 		st.title("Admin Login")
 		username = st.sidebar.text_input("Username")
 		password = st.sidebar.text_input("Password",type='password')
 		if st.sidebar.checkbox("Login"):
-			# if password == '12345':
+			
 			create_usertable()
 			hashed_pswd = make_hashes(password)
 
@@ -116,7 +148,7 @@ def main():
 		username = st.sidebar.text_input("User Name")
 		password = st.sidebar.text_input("Password",type='password')
 		if st.sidebar.checkbox("Login"):
-			# if password == '12345':
+		
 			create_usertable()
 			hashed_pswd = make_hashes(password)
 
